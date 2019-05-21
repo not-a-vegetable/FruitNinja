@@ -5,7 +5,10 @@ package view;/*
  */
 
 import org.lwjgl.input.Mouse;
-import org.newdawn.slick.*;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -37,13 +40,12 @@ public class GamePlay extends BasicGameState {
 
         g.drawString("Time: " + time / 1000, 500, 10);
         g.drawString("Lives: ", 400, 10);
-        Image apple = new Image("fruitNinja1/images/apple.png");
-        Image orange = new Image("fruitNinja1/images/orange.png");
-        books[0] = apple;
-        books[1] = orange;
 
-        g.drawImage(apple, applePosX, applePosY);
-        g.drawImage(orange, orangePosX, orangePosY);
+        books[0] = new Book("resimages/book1.png", "book");
+        books[1] = new Book("res/images/book2.png", "book");
+
+        g.drawImage(books[0], applePosX, applePosY);
+        g.drawImage(books[1], orangePosX, orangePosY);
 
 
         if (quit == true) {
@@ -68,9 +70,8 @@ public class GamePlay extends BasicGameState {
 
         if (Mouse.isButtonDown(0)) {
             System.out.println("Mouse clicked at (" + Mouse.getX() + ", " + Mouse.getY() + ")");
-            for (Image fruit : fruits) {
+            for (Book fruit : books) {
                 if (fruit.inBounds(Mouse.getX(), Mouse.getY())) {
-                    fruit.highlight();
                     System.exit(0);
                     System.out.println("Box clicked at (" + Mouse.getX() + ", " + Mouse.getY() + ").");
                     break;
